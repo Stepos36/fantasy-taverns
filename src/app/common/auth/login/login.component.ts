@@ -70,6 +70,19 @@ export class LoginComponent implements OnInit, OnDestroy {
             tavern: this.tavern,
         };
         console.log(payload);
+
+        this.authService.create(payload).subscribe(
+            (user) => {
+                if (user) {
+                    this.toggleSignup();
+                    console.log('Successfuly Signed Up!');
+                    
+                }
+            },
+        (error) => {
+            console.log(error);
+        },
+        );
     }
 
     login(): void {
