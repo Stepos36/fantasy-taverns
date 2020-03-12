@@ -15,8 +15,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     showSignup = false;
     taverns: ITavern[];
     roles: IRole[];
-    tavern: {};
-    role: {};
+    tavern: ITavern;
+    role: IRole;
 
     constructor(private router: Router, private authService: AuthService, private tavernService: TavernServiceService, private roleService: RoleService) {}
 
@@ -39,7 +39,10 @@ export class LoginComponent implements OnInit, OnDestroy {
     changeRole(role): void {
         this.role = role;
         this.newTavernName = '';
-        this.tavern = {};
+        this.tavern = {
+            ID: null,
+            Name: 'Choose Your Tavern'
+        };
     }
 
     chooseTavern(tavern): void {
