@@ -6,6 +6,26 @@
       <input type="text" class="form-control" [(ngModel)]="userName" name="userName" />
       <label>Password</label>
       <input type="password" class="form-control" [(ngModel)]="password" name="password" />
+      <div *ngIf="showSignup">
+        <div class="d-flex flex-row mt-2">
+          <div ngbDropdown class="d-inline-block">
+            <button class="btn btn-outline-success" id="roleDropdown" ngbDropdownToggle>{{this.role ? this.role.Name : 'Choose Your Role'}}</button>
+            <div ngbDropdownMenu aria-labelledby="rolenDropdown">
+              <button *ngFor="let role of roles" (click)="changeRole(role)" ngbDropdownItem>{{role.Name}}</button>
+            </div>
+          </div>
+        </div>
+        <div ngbDropdown *ngIf="role && role.ID == 1" class="d-inline-block">
+          <button class="btn btn-outline-primary mt-2" id="tavernDropdown" ngbDropdownToggle>{{this.tavern ? this.tavern.Name : 'Choose Your Tavern'}}</button>
+          <div ngbDropdownMenu aria-labelledby="tavernDropdown">
+            <button *ngFor="let tavern of taverns" (click)="chooseTavern(tavern)" ngbDropdownItem>{{tavern.Name}}</button>
+          </div>
+        </div>
+        <div ngbDropdown *ngIf="role && role.ID == 2" class="d-inline-block mt-2">
+          <label>Enter your tavern name:</label>
+          <input type="text" class="form-control" [(ngModel)]="newTavernName" name="newTavernName" />
+        </div>
+      </div>
     </div>
     <div class="col-md-6"></div>
   </div>
@@ -15,7 +35,7 @@
       <button *ngIf="!showSignup" type="submit" class="btn btn-primary" (click)="login()">
         Submit
       </button>
-      <button *ngIf="showSignup" type="submit" class="btn btn-primary" (click)="signup()">
+      <button *ngIf="showSignup" (mouseover)="checkForOwner(newTavernName)" type="submit" class="btn btn-primary" (click)="signup()">
         Sign Up
       </button>
       <button type="submit" class="btn btn-danger float-right" (click)="toggleSignup()">

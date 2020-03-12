@@ -31,6 +31,7 @@
         "express": "4.16.4",
         "jquery": "^3.4.1",
         "mssql": "5.1.0",
+        "ng-bootstrap": "^1.6.3",
         "ngx-cookie": "4.1.2",
         "nodemon": "1.19.1",
         "parse-error": "0.2.0",
