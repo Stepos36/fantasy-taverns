@@ -15,13 +15,13 @@
             </div>
           </div>
         </div>
-        <div ngbDropdown *ngIf="role && role.ID == 1" class="d-inline-block">
+        <div ngbDropdown *ngIf="role && role.Id == 1" class="d-inline-block">
           <button class="btn btn-outline-primary mt-2" id="tavernDropdown" ngbDropdownToggle>{{this.tavern ? this.tavern.Name : 'Choose Your Tavern'}}</button>
           <div ngbDropdownMenu aria-labelledby="tavernDropdown">
             <button *ngFor="let tavern of taverns" (click)="chooseTavern(tavern)" ngbDropdownItem>{{tavern.Name}}</button>
           </div>
         </div>
-        <div ngbDropdown *ngIf="role && role.ID == 2" class="d-inline-block mt-2">
+        <div ngbDropdown *ngIf="role && role.Id == 2" class="d-inline-block mt-2">
           <label>Enter your tavern name:</label>
           <input type="text" class="form-control" [(ngModel)]="newTavernName" name="newTavernName" />
         </div>

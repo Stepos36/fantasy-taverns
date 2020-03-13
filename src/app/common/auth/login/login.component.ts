@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.role = role;
         this.newTavernName = '';
         this.tavern = {
-            ID: null,
+            Id: 0,
             Name: 'Choose Your Tavern'
         };
     }
@@ -50,24 +50,24 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
 
     createNewTavern(tavernName): void {
-        let newID = this.tavernService.getTaverns().length+1;
+        // let newID = this.tavernService.getTaverns().length+1;
         this.tavern = {
-            ID: newID,
+            Id: 0,
             Name: tavernName,
         }
     }
 
     checkForOwner(tavernName): void {
-        if (this.role.ID == 2) {
+        if (this.role.Id == 2) {
             this.createNewTavern(tavernName);
         }
     }
 
     signup(): void {
         const payload = {
-            userName: this.userName,
-            password: this.password,
-            tavern: this.tavern,
+            UserName: this.userName,
+            Password: this.password,
+            Tavern: this.tavern,
         };
         console.log(payload);
 
@@ -76,7 +76,6 @@ export class LoginComponent implements OnInit, OnDestroy {
                 if (user) {
                     this.toggleSignup();
                     console.log('Successfuly Signed Up!');
-                    
                 }
             },
         (error) => {

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 export interface IRole {
-  ID: number;
+  Id: number;
   Name: string;
 }
 
@@ -11,8 +11,8 @@ export interface IRole {
 export class RoleService {
   
   roles: IRole[] = [
-    { ID:1 , Name: 'Manager' },
-    { ID:2 , Name: 'Owner' },
+    { Id:1 , Name: 'Manager' },
+    { Id:2 , Name: 'Owner' },
   ]
 
   constructor() { }

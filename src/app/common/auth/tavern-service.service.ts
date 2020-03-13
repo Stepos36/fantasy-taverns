@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 export interface ITavern {
-  ID: number;
+  Id: number;
   Name: string;
 }
 
@@ -12,11 +12,11 @@ export interface ITavern {
 export class TavernServiceService {
   
   taverns: ITavern[] = [
-    { ID:1 , Name: 'Tavern #1' },
-    { ID:2 , Name: 'Tavern #2' },
-    { ID:3 , Name: 'Tavern #3' },
-    { ID:4 , Name: 'Tavern #4' },
-    { ID:5 , Name: 'Moe\'s' }
+    { Id:1 , Name: 'Tavern #1' },
+    { Id:2 , Name: 'Tavern #2' },
+    { Id:3 , Name: 'Tavern #3' },
+    { Id:4 , Name: 'Tavern #4' },
+    { Id:5 , Name: 'Moe\'s' }
   ]
 
   constructor() { }
