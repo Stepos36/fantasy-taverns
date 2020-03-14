@@ -65,6 +65,7 @@ export class AuthService {
                             ? response
                             : null;
                     this.setUser(currentUser);
+                    console.log(currentUser)
                 }),
             );
     }

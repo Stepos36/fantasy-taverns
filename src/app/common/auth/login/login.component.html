@@ -16,9 +16,9 @@
           </div>
         </div>
         <div ngbDropdown *ngIf="role && role.Id == 1" class="d-inline-block">
-          <button class="btn btn-outline-primary mt-2" id="tavernDropdown" ngbDropdownToggle>{{this.tavern ? this.tavern.Name : 'Choose Your Tavern'}}</button>
+          <button class="btn btn-outline-primary mt-2" id="tavernDropdown" ngbDropdownToggle>{{this.tavern ? this.tavern.TavernName : 'Choose Your Tavern'}}</button>
           <div ngbDropdownMenu aria-labelledby="tavernDropdown">
-            <button *ngFor="let tavern of taverns" (click)="chooseTavern(tavern)" ngbDropdownItem>{{tavern.Name}}</button>
+            <button *ngFor="let tavern of taverns" (click)="chooseTavern(tavern)" ngbDropdownItem>{{tavern.TavernName}}</button>
           </div>
         </div>
         <div ngbDropdown *ngIf="role && role.Id == 2" class="d-inline-block mt-2">

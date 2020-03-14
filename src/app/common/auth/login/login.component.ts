@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         console.log('comes into being');
-        this.taverns = this.tavernService.getTaverns();
+        this.tavernService.getTaverns().subscribe((response) => {console.log(response);this.taverns = response});
         this.roles = this.roleService.getRoles()
     }
 
@@ -41,19 +41,19 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.newTavernName = '';
         this.tavern = {
             Id: 0,
-            Name: 'Choose Your Tavern'
+            TavernName: 'Choose Your Tavern'
         };
     }
 
     chooseTavern(tavern): void {
-        this.tavern = tavern
+        this.tavern = tavern;
+        console.log(tavern)
     }
 
     createNewTavern(tavernName): void {
-        // let newID = this.tavernService.getTaverns().length+1;
         this.tavern = {
             Id: 0,
-            Name: tavernName,
+            TavernName: tavernName,
         }
     }
 

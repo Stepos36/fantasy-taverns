@@ -29,7 +29,7 @@ const createUser = async function(userInfo) {
         try {
             tavernResult = await pool
                 .request()
-                .input('TavernName', sql.VarChar, userInfo.Tavern.TavernName)
+                .input('TavernName', sql.VarChar, userInfo.Tavern.Name)
                 .query(
                     'INSERT INTO Taverns ([TavernName]) OUTPUT inserted.* values (@TavernName)',
                 );
