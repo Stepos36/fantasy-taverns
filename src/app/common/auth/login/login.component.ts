@@ -47,7 +47,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     chooseTavern(tavern): void {
         this.tavern = tavern;
-        console.log(tavern)
     }
 
     createNewTavern(tavernName): void {
@@ -69,7 +68,6 @@ export class LoginComponent implements OnInit, OnDestroy {
             Password: this.password,
             Tavern: this.tavern,
         };
-        console.log(payload);
 
         this.authService.create(payload).subscribe(
             (user) => {
@@ -89,7 +87,7 @@ export class LoginComponent implements OnInit, OnDestroy {
             (response) => {
                 if (response.success) {
                     console.log('successful login');
-                    this.router.navigateByUrl('/home');
+                    this.router.navigateByUrl('/my-tavern');
                 }
             },
             (error) => {

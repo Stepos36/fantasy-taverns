@@ -1,6 +1,5 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
 import { IMyTavern, TavernServiceService } from '../common/auth/tavern-service.service';
-import { ICurrentlyLoggedInUser } from '../common/auth/auth.service';
 
 @Component({
   selector: 'app-my-tavern',
@@ -9,18 +8,19 @@ import { ICurrentlyLoggedInUser } from '../common/auth/auth.service';
 })
 
 export class MyTavernComponent implements OnInit {
-  tavern: IMyTavern[];
-  tavernName = '';
-  //user: ICurrentlyLoggeInUser;
+  rooms: IMyTavern[];
+  TavernName = '';
+  UserName = '';
 
   constructor(private tavernService: TavernServiceService) { }
 
   ngOnInit(): void {
-    this.tavern = [];
+    this.rooms = [];
     this.tavernService.getCurrentTavern().subscribe((response) => {
-      this.tavern = response;
+      this.rooms = response;
+      this.TavernName = response[0].TavernName;
+      this.UserName = response[0].UserName;
     });
-    
   }
 
 }

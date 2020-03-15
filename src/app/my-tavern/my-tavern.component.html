@@ -1,1 +1,8 @@
-<h2>{{this.tavern.TavernName}}</h2>
+<h2>{{this.TavernName}}</h2>
+<p>You are currently logged in as {{this.UserName}}</p>
+<div *ngFor="let room of rooms" class="mb-2 border border-success">
+<h4>{{room.RoomName}}</h4>
+<p *ngIf="room.RoomStatus">This room is available</p>
+<p *ngIf="!room.RoomStatus">This room is unavailable</p>
+<p>Daily rate: ${{room.DailyRate}}</p>
+</div>

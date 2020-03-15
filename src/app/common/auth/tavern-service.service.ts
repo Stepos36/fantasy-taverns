@@ -8,9 +8,12 @@ export interface ITavern {
 }
 
 export interface IMyTavern {
-  TavernName: string;
+  RoomName: string;
+  RoomStatus: boolean;
+  DailyRate: number;
   UserName : string;
   TavernID: number;
+  TavernName: string;
 }
 
 @Injectable({

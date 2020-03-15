@@ -30,27 +30,27 @@ module.exports.getAll = getAll;
 getCurrent = async function(req, res) {
     // format request
 
-    let tavern;
+    let rooms;
 
     res.setHeader('Content-Type', 'application/json');
 
     const pool = await poolPromise;
 
     try {
-        tavern = await pool
+        rooms = await pool
             .request()
             .input('UserId', sql.Int, req.user.ID)
             .query(
                 // eslint-disable-next-line quotes
-                `SELECT TOP (1) TavernName, UserName, TavernId FROM Taverns JOIN Users on Users.TavernID = Taverns.ID WHERE Users.ID = @UserId`
+                `SELECT RoomName, RoomStatus, DailyRate, TavernName, UserName, Rooms.TavernID FROM Rooms JOIN Taverns on TavernID = Taverns.ID JOIN Users on Users.TavernID = Taverns.ID WHERE Users.ID = @UserId`
             );
-        tavern = tavern.recordset.shift();
-        console.log(req.user)
+        rooms = rooms.recordset;
     } catch (e) {
         returnError(res, e, 500);
     }
 
-    return res.json(tavern);
+    return res.json(rooms);
+
 };
 
 module.exports.getCurrent = getCurrent;
