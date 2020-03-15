@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         console.log('comes into being');
-        this.tavernService.getTaverns().subscribe((response) => {console.log(response);this.taverns = response});
+        this.tavernService.getTaverns().subscribe((response) => {this.taverns = response});
         this.roles = this.roleService.getRoles()
     }
 

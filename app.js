@@ -73,6 +73,11 @@ app.get(
     '/taverns',
     tavernsController.getAll,
 );
+app.get(
+    '/my-tavern',
+    passport.authenticate('jwt', { session: false }),
+    tavernsController.getCurrent,
+);
 
 console.log('SERVER READY');
 module.exports = app;

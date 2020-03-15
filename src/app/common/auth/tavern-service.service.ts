@@ -7,6 +7,12 @@ export interface ITavern {
   TavernName: string;
 }
 
+export interface IMyTavern {
+  TavernName: string;
+  UserName : string;
+  TavernID: number;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -26,5 +32,8 @@ export class TavernServiceService {
 
   getTaverns(): Observable<ITavern[]>{
     return this.http.get<ITavern[]> ('http://localhost:3000/taverns');
+  }
+  getCurrentTavern(): Observable<IMyTavern[]>{
+    return this.http.get<IMyTavern[]> ('http://localhost:3000/my-tavern');
   }
 }
