@@ -19,7 +19,6 @@ export class MyTavernComponent implements OnInit {
     this.tavern = [];
     this.tavernService.getCurrentTavern().subscribe((response) => {
       this.tavern = response;
-      console.log(response)
     });
     
   }
