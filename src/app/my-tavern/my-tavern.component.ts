@@ -16,6 +16,7 @@ export class MyTavernComponent implements OnInit {
   constructor(private tavernService: TavernServiceService) { }
 
   ngOnInit(): void {
+    this.tavern = [];
     this.tavernService.getCurrentTavern().subscribe((response) => {
       this.tavern = response;
       console.log(response)
