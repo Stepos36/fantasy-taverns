@@ -42,7 +42,7 @@ getCurrent = async function(req, res) {
             .input('UserId', sql.Int, req.user.ID)
             .query(
                 // eslint-disable-next-line quotes
-                `SELECT RoomName, RoomStatus, DailyRate, TavernName, UserName, Rooms.TavernID FROM Rooms JOIN Taverns on TavernID = Taverns.ID JOIN Users on Users.TavernID = Taverns.ID WHERE Users.ID = @UserId`
+                `SELECT Rooms.ID as RoomID, RoomName, RoomStatus, DailyRate, TavernName, UserName, Rooms.TavernID FROM Rooms JOIN Taverns on TavernID = Taverns.ID JOIN Users on Users.TavernID = Taverns.ID WHERE Users.ID = @UserId`
             );
         rooms = rooms.recordset;
     } catch (e) {

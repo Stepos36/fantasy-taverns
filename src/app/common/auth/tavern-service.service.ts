@@ -8,6 +8,7 @@ export interface ITavern {
 }
 
 export interface IMyTavern {
+  RoomId: number;
   RoomName: string;
   RoomStatus: boolean;
   DailyRate: number;

@@ -5,4 +5,22 @@
 <p *ngIf="room.RoomStatus">This room is available</p>
 <p *ngIf="!room.RoomStatus">This room is unavailable</p>
 <p>Daily rate: ${{room.DailyRate}}</p>
+<button class="btn btn-outline-primary mb-2 mr-2" (mouseover)="this.assignRoomToModal(room)" (click)="this.openModal(content)">Edit {{room.RoomName}}</button>
 </div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+  <h4 class="modal-title">Room Editor for {{this.roomBeingEdited.RoomName}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Room ID : {{this.roomBeingEdited.RoomID}}</p>
+    <p>Is Room Available: {{this.roomBeingEdited.Availability}}</p>
+    <p>Daily Rate : ${{this.roomBeingEdited.DailyRate}}</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+  </div>
+</ng-template>
