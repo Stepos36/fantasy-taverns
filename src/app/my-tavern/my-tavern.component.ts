@@ -1,6 +1,8 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit, OnChanges, ViewChild } from '@angular/core';
 import { IMyTavern, TavernServiceService } from '../common/auth/tavern-service.service';
 import { ModalComponent } from '../common/modal/modal.component';
+import { NgForm } from '@angular/forms';
+import { RoomService } from './room-service';
 
 @Component({
   selector: 'app-my-tavern',
@@ -9,17 +11,20 @@ import { ModalComponent } from '../common/modal/modal.component';
 })
 
 export class MyTavernComponent implements OnInit {
+
   rooms: IMyTavern[];
   TavernName = '';
   UserName = '';
+  TavernID = 0;
   roomBeingEdited = {
     RoomID: '',
     RoomName: '',
-    DailyRate: '',
-    Availability: '',
+    TavernID: 0,
+    DailyRate: 0,
+    Availability: false,
   };
 
-  constructor(private tavernService: TavernServiceService, private Modal: ModalComponent) { }
+  constructor(private tavernService: TavernServiceService, private Modal: ModalComponent, private roomService: RoomService) { }
 
   ngOnInit(): void {
     this.rooms = [];
@@ -27,20 +32,47 @@ export class MyTavernComponent implements OnInit {
       this.rooms = response;
       this.TavernName = response[0].TavernName;
       this.UserName = response[0].UserName;
-      console.log(this.rooms)
+      this.TavernID = response[0].TavernID
     });
   }
 
   openModal(content): void {
     this.Modal.openVerticallyCentered(content)
+
   }
 
   assignRoomToModal(room): void {
     this.roomBeingEdited = {
       RoomID: room.RoomID,
+      TavernID: this.TavernID,
       RoomName: room.RoomName,
       DailyRate: room.DailyRate,
       Availability: room.RoomStatus,
     }
+  }
+
+  createRoom(form): void {
+    if (form.valid) {
+      this.roomService.createRoom(form.value).subscribe();
+      this.tavernService.getCurrentTavern().subscribe((response) => {
+      this.rooms = response;
+    });
+    }
+    
+  }
+
+  deleteRoom(room): void {
+    this.roomService.deleteRoom(room).subscribe()
+    this.tavernService.getCurrentTavern().subscribe((response) => {
+      this.rooms = response;
+    });
+  }
+
+  changeAvailability(room): void {
+    this.roomBeingEdited.Availability = !this.roomBeingEdited.Availability
+  }
+
+  logForm(form): void {
+    console.log(form.value)
   }
 }

@@ -6,7 +6,9 @@
 <p *ngIf="!room.RoomStatus">This room is unavailable</p>
 <p>Daily rate: ${{room.DailyRate}}</p>
 <button class="btn btn-outline-primary mb-2 mr-2" (mouseover)="this.assignRoomToModal(room)" (click)="this.openModal(content)">Edit {{room.RoomName}}</button>
+<button class="btn btn-outline-danger mb-2 mr-2" (click)="this.deleteRoom(room)">Delete {{room.RoomName}}</button>
 </div>
+<button class="btn btn-outline-danger" (click)="this.openModal(contentNew)">Create New Room</button>
 
 <ng-template #content let-modal>
   <div class="modal-header">
@@ -16,11 +18,57 @@
     </button>
   </div>
   <div class="modal-body">
-    <p>Room ID : {{this.roomBeingEdited.RoomID}}</p>
-    <p>Is Room Available: {{this.roomBeingEdited.Availability}}</p>
-    <p>Daily Rate : ${{this.roomBeingEdited.DailyRate}}</p>
+    <form #roomForm = "ngForm" class="container" (submit)="logForm(roomForm)">
+        <label>Enter your room name:</label>
+        <input type="text" class="form-control" name="RoomName" ngModel="{{this.roomBeingEdited.RoomName}}" #RoomName = "ngModel" required>
+        <div *ngIf="RoomName.invalid && (RoomName.dirty || RoomName.touched)" class="alert alert-danger">
+            <div *ngIf="RoomName.errors.required">
+                Room Name is required
+            </div>
+        </div>
+        <div class="d-flex d-inline">
+                <label>Select your room availability: </label>
+                <label class="ml-1 align-self-center" for="Availability">{{this.roomBeingEdited.Availability ? ' Available' : ' Unavailable'}}</label>
+                <input type="checkbox" style="height:20px; width: 20px" class="form-control ml-2" name="Availability" [(ngModel)]="this.roomBeingEdited.Availability">
+        </div>
+       
+        <label>Set your room price: </label>
+        <input type="hidden" class="form-control" name="RoomID" ngModel="{{this.roomBeingEdited.RoomID}}">
+        <div class="d-flex d-inline">
+            <span class="d-flex align-self-center">$</span>
+            <input type="number" step="0.01" class="form-control" name="DailyRate" ngModel="{{this.roomBeingEdited.DailyRate}}" #DailyRate = "ngModel" required>
+        </div>
+        <div *ngIf="DailyRate.invalid && (DailyRate.dirty || DailyRate.touched)" class="alert alert-danger">
+            <div *ngIf="DailyRate.errors.required">
+                Daily Rate is required
+            </div>
+        </div>
+          <button class="btn btn-outline-success mt-2 ml-2" type="submit">Save</button>
+        </form>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    <button type="button" class="btn btn-outline-danger" (click)="modal.close('Close click')">Cancel</button>
   </div>
+</ng-template>
+
+<ng-template #contentNew let-modal>
+    <div class="modal-header">
+    <h4 class="modal-title">Create a new room</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form #roomForm = "ngForm" class="container" (submit)="createRoom(roomForm)">
+          <input type="text" class="form-control" name="RoomName" ngModel>
+            <input type="hidden" class="form-control" name="TavernID" ngModel="{{TavernID}}">
+          <input type="text" class="form-control" name="Availability" ngModel>
+          <input type="hidden" class="form-control" name="RoomID" ngModel="0">
+          <input type="number" step="0.01" class="form-control" name="DailyRate" ngModel>
+            <button type="submit">Submit</button>
+          </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
 </ng-template>
