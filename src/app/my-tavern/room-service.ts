@@ -28,4 +28,8 @@ export class RoomService {
     let options = { params: httpParams };
     return this.http.delete<IRoom> ('http://localhost:3000/delete-room', options)
   }
+
+  updateRoom(room: IRoom): Observable<IRoom>{
+    return this.http.put<IRoom> ('http://localhost:3000/edit-room', room)
+  }
 }

@@ -88,8 +88,14 @@ app.post(
 app.delete(
     '/delete-room',
     passport.authenticate('jwt', { session: false }),
-    roomController.deleteRoom
+    roomController.deleteRoom,
 )
+
+app.put(
+    '/edit-room', 
+    passport.authenticate('jwt', { session: false }),
+    roomController.updateRoom,
+);
 
 console.log('SERVER READY');
 module.exports = app;

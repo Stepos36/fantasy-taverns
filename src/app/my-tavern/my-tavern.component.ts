@@ -68,11 +68,10 @@ export class MyTavernComponent implements OnInit {
     });
   }
 
-  changeAvailability(room): void {
-    this.roomBeingEdited.Availability = !this.roomBeingEdited.Availability
-  }
-
-  logForm(form): void {
-    console.log(form.value)
+  logForm(room): void {
+    this.roomService.updateRoom(room).subscribe();
+      this.tavernService.getCurrentTavern().subscribe((response) => {
+      this.rooms = response;
+    });
   }
 }
