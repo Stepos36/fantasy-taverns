@@ -40,9 +40,10 @@ getCurrent = async function(req, res) {
         rooms = await pool
             .request()
             .input('UserId', sql.Int, req.user.ID)
+            .input('Name', sql.VarChar, req.query.Search)
             .query(
                 // eslint-disable-next-line quotes
-                `SELECT Rooms.ID as RoomID, RoomName, RoomStatus, DailyRate, TavernName, UserName, Rooms.TavernID FROM Rooms JOIN Taverns on TavernID = Taverns.ID JOIN Users on Users.TavernID = Taverns.ID WHERE Users.ID = @UserId`
+                `SELECT Rooms.ID as RoomID, RoomName, RoomStatus, DailyRate, TavernName, UserName, Rooms.TavernID FROM Rooms JOIN Taverns on TavernID = Taverns.ID JOIN Users on Users.TavernID = Taverns.ID WHERE Users.ID = @UserId and RoomName Like '%'+ @Name +'%' `
             );
         rooms = rooms.recordset;
     } catch (e) {

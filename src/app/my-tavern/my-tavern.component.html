@@ -1,5 +1,11 @@
 <h2>{{this.TavernName}}</h2>
 <p>You are currently logged in as {{this.UserName}}</p>
+<div class="row form-group">
+  <div class="col-md-8">
+    <label for="search">Search</label>
+    <input class="form-control" id="search" (keyup) = "search($event)" [(ngModel)] = "searchText" placeholder="Enter your tavern name to search">
+  </div>
+</div>
 <div *ngFor="let room of rooms" class="mb-2 border border-success">
 <h4>{{room.RoomName}}</h4>
 <p *ngIf="room.RoomStatus">This room is available</p>
@@ -18,7 +24,7 @@
     </button>
   </div>
   <div class="modal-body">
-    <form #roomForm = "ngForm" class="container" (submit)="logForm(this.roomBeingEdited)">
+    <form #roomForm = "ngForm" class="container" (submit)="updateRoom(roomForm, this.roomBeingEdited)">
         <label>Enter your room name:</label>
         <input type="text" class="form-control" name="RoomName" [(ngModel)]="this.roomBeingEdited.RoomName" #RoomName = "ngModel" maxlength="50" required>
         <div *ngIf="RoomName.invalid && (RoomName.dirty || RoomName.touched)" class="alert alert-danger">

@@ -35,9 +35,9 @@ export class TavernServiceService {
   ) { }
 
   getTaverns(): Observable<ITavern[]>{
-    return this.http.get<ITavern[]> ('http://localhost:3000/taverns');
+    return this.http.get<ITavern[]> (`http://localhost:3000/taverns`);
   }
-  getCurrentTavern(): Observable<IMyTavern[]>{
-    return this.http.get<IMyTavern[]> ('http://localhost:3000/my-tavern');
+  getCurrentTavern(searchText: string): Observable<IMyTavern[]>{
+    return this.http.get<IMyTavern[]> (`http://localhost:3000/my-tavern?Search=${searchText}`);
   }
 }
